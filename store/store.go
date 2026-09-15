@@ -34,3 +34,29 @@ func (s *Store) CreateUser(user *models.User) error {
 	s.Users[user.ID] = user
 	return nil
 }
+
+func (s *Store) CreateTicket(ticket *models.Ticket) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.Tickets[ticket.ID] = ticket
+	return nil
+}
+
+func (s *Store) GetTicketsByOwner(ownerID string) []*models.Ticket {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	var result []*models.Ticket
+	for _, ticket := range s.Tickets {
+		if ticket.OwnerID == ownerID {
+			result = append(result, ticket)
+		}
+	}
+	return result
+}
+
+func (s *Store) GetTicketByID(id string) (*models.Ticket, bool) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	ticket, exists := s.Tickets[id]
+	return ticket, exists
+}
