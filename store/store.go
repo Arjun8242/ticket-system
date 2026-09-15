@@ -45,7 +45,7 @@ func (s *Store) CreateTicket(ticket *models.Ticket) error {
 func (s *Store) GetTicketsByOwner(ownerID string) []*models.Ticket {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	var result []*models.Ticket
+	result := make([]*models.Ticket, 0)
 	for _, ticket := range s.Tickets {
 		if ticket.OwnerID == ownerID {
 			result = append(result, ticket)

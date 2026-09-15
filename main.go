@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/Arjun8242/ticket-system.git/handlers"
 	"github.com/Arjun8242/ticket-system.git/middleware"
@@ -30,9 +31,13 @@ func main() {
 		r.Patch("/tickets/{id}/status", ticketHandler.UpdateTicketStatusHandler)
 	})
 
-	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello World")
-	})
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	if !strings.HasPrefix(port, ":") {
+		port = ":" + port
+	}
 
-	http.ListenAndServe(":8080", router)
+	http.ListenAndServe(port, router)
 }
