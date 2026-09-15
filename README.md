@@ -2,6 +2,10 @@
 
 A lightweight RESTful API for ticket management built with Go, Chi router, JWT authentication, and an in-memory thread-safe store.
 
+## Live Deployment
+- **Deployed Service URL**: `https://ticket-system-8tlr.onrender.com`
+- **Public Health Check**: `https://ticket-system-8tlr.onrender.com/health`
+
 ## Prerequisites
 - Go 1.22+
 - Docker (optional, for containerized run)
