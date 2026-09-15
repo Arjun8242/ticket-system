@@ -9,9 +9,14 @@ import (
 	"github.com/Arjun8242/ticket-system.git/middleware"
 	"github.com/Arjun8242/ticket-system.git/store"
 	"github.com/go-chi/chi/v5"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+	}
+
 	appStore := store.NewStore()
 	authHandler := handlers.NewAuthHandler(appStore)
 	ticketHandler := handlers.NewTicketHandler(appStore)
